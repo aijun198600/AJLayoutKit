@@ -62,7 +62,9 @@ public func constraintOwningView(with firstItem: AnyObject?, and secondItem: Any
     }
     
     if let v1 = firstView, let v2 = secondView {
-        if v1.superview == v2.superview { // A and B are at the same level
+        if v1 == v2 {
+            view = v1
+        }else if v1.superview == v2.superview { // A and B are at the same level
             view = v1.superview
         } else if v1.superview == v2 { // A is in B (first level)
             view = v2

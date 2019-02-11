@@ -118,16 +118,18 @@ class ViewController: UIViewController {
         let v2 = UIView()
         v2.backgroundColor = UIColor.red
         
+        let v3 = UIView()
+        v3.backgroundColor = UIColor.blue
+        
         self.view.sv(
             v1,
-            v2
+            v2,
+            v3
         )
         
         self.view.layout(
-            |-(20% + 10 ^ "v1 left")-v1.size(300 ^ "v1 size"),
-            ||v1-(25% + 12 ^ "v1 v2 h span")-v2.size(80 ^ "v2 size"),
-            &-(20% + 10 ^ "v1 top")-v1,
-            &&v1-(30% ^ "v1 v2 v span")-v2
+            |-(20% + 10 ^ "v1 left")-v1.size(300 ^ "v1 size")-(25% + 12 ^ "v1 v2 h span")-v2.size(80 ^ "v2 size"),
+            &-(20% + 10 ^ "v1 top")-v1-(30% ^ "v1 v2 h span")-v2
         )
         
         for c in v1.constraints {

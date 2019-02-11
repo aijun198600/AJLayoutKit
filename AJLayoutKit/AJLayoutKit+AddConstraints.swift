@@ -158,7 +158,7 @@ public extension AJLayoutConstraint {
         
         if #available(iOS 11.0, *) {
             // if the superview has no superview, it should use safe area, present superview be the viewcontroller's view
-            if let v = spv as? UIView, v.superview == nil {
+            if let v = spv as? UIView, v.superview is UIWindow {
                 spv = v.safeAreaLayoutGuide
             }
         }
@@ -259,19 +259,18 @@ public extension AJLayoutConstraint {
             let view = constraintOwningView(with: leftView, and: rightView)
             view?.addLayoutGuide(span)
             
-            let arg1 = AJLayoutArgument(item: leftView, attribute: left.attribute, toItem: rightView, attribute: self.chainConnectAttribute(left.attribute), multiplier: 1.0, constant: 0)
-            let c1 = self.constraint(arg1)
-            c1.owningView?.addConstraint(c1)
-//            self.layoutConstraints.append(c1)
             let attr: NSLayoutConstraint.Attribute = (left.attribute == .leading || left.attribute == .trailing) ? .width : .height
-            let arg2 = AJLayoutArgument(item: span, attribute: attr, toItem: view, attribute: attr, multiplier: percent.value, constant: value.constant)
-            let c2 = self.constraint(arg2)
-            c2.owningView?.addConstraint(c2)
-//            self.layoutConstraints.append(c2)
-            let arg3 = AJLayoutArgument(item: rightView, attribute: right.attribute, toItem: span, attribute: self.chainConnectAttribute(right.attribute), multiplier: 1.0, constant: 0)
-            let c3 = self.constraint(arg3)
-            c3.owningView?.addConstraint(c3)
-//            self.layoutConstraints.append(c3)
+            let spanArg = AJLayoutArgument(item: span, attribute: attr, toItem: view, attribute: attr, multiplier: percent.value, constant: value.constant)
+            let spanConstraint = self.constraint(spanArg)
+            spanConstraint.owningView?.addConstraint(spanConstraint)
+            
+            let leftArg = AJLayoutArgument(item: leftView, attribute: left.attribute, toItem: span, attribute: self.chainConnectAttribute(left.attribute), multiplier: 1.0, constant: 0)
+            let leftConstraint = self.constraint(leftArg)
+            leftConstraint.owningView?.addConstraint(leftConstraint)
+            
+            let rightArg = AJLayoutArgument(item: rightView, attribute: right.attribute, toItem: span, attribute: self.chainConnectAttribute(right.attribute), multiplier: 1.0, constant: 0)
+            let rightConstraint = self.constraint(rightArg)
+            rightConstraint.owningView?.addConstraint(rightConstraint)
         }else {
             let arg = AJLayoutArgument(item: leftView, attribute: left.attribute, toItem: rightView, attribute: right.attribute, multiplier: 1.0, constant: (self.value != nil ? self.value!.constant : 0))
             let c = self.constraint(arg)
