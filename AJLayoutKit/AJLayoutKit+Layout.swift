@@ -34,10 +34,10 @@ public extension UIView {
         
         for (_, o) in objects.enumerated() {
             switch o {
-//            case let c as AJLayoutContainer:
-//                c.addconstraints()
-//            case let c as AJLayoutConstraint:
-//                c.addConstraint()
+            case let c as AJLayoutContainer:
+                c.addConstraints()
+            case let c as AJLayoutConstraint:
+                c.addConstraints()
             default: ()
             }
         }

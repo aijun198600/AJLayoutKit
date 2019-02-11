@@ -14,6 +14,36 @@ public enum AJLayoutDirect {
     case unkown
 }
 
+public class AJLayoutChain {
+    var attribute: AJLayoutAttribute
+    var value: AJValue?
+    
+    public init(attribute: AJLayoutAttribute) {
+        self.attribute = attribute
+    }
+    
+    public init(attribute: AJLayoutAttribute, value:AJValue?) {
+        self.attribute = attribute
+        self.value = value
+    }
+}
+
+public class AJLayoutContainer {
+    public var constraints:[AJLayoutConstraint] = []
+    var direct: AJLayoutDirect = .unkown
+    
+    var chain: AJLayoutChain
+    
+    public init(chain: AJLayoutChain) {
+        self.chain = chain
+    }
+    
+    public init(chain: AJLayoutChain, direct: AJLayoutDirect) {
+        self.chain = chain
+        self.direct = direct
+    }
+}
+
 
 
 

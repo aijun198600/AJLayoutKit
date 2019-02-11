@@ -11,7 +11,7 @@ import UIKit
 public extension AJLayoutConstraint {
     // remove constraints and custom UILayoutGuide
     public func removeConstraints() {
-        for constraint in constraints {
+        for constraint in layoutConstraints {
             var guide: UILayoutGuide?
             if let v = constraint.firstItem as? UILayoutGuide {
                 guide = v
@@ -24,7 +24,7 @@ public extension AJLayoutConstraint {
             }
             constraint.owningView?.removeConstraint(constraint)
         }
-        self.constraints = []
+        self.layoutConstraints = []
     }
 }
 
@@ -40,7 +40,7 @@ public extension NSLayoutConstraint {
     }
 }
 
-func constraintOwningView(with firstItem: AnyObject?, and secondItem: AnyObject?) -> UIView? {
+public func constraintOwningView(with firstItem: AnyObject?, and secondItem: AnyObject?) -> UIView? {
     var view: UIView?
     
     var firstView: UIView?
@@ -49,12 +49,16 @@ func constraintOwningView(with firstItem: AnyObject?, and secondItem: AnyObject?
         firstView = v
     }else if let v = firstItem as? UILayoutGuide {
         firstView = v.owningView
+    }else if let _ = firstItem as? AJLayoutSide, let v = secondItem as? UIView {
+        firstView = v.superview
     }
     
     if let v = secondItem as? UIView {
         secondView = v
     }else if let v = secondItem as? UILayoutGuide {
         secondView = v.owningView
+    }else if let _ = secondItem as? AJLayoutSide, let v = firstItem as? UIView {
+        secondView = v.superview
     }
     
     if let v1 = firstView, let v2 = secondView {
