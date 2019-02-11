@@ -263,7 +263,8 @@ public extension AJLayoutConstraint {
             let c1 = self.constraint(arg1)
             c1.owningView?.addConstraint(c1)
 //            self.layoutConstraints.append(c1)
-            let arg2 = AJLayoutArgument(item: span, attribute: (left.attribute == .leading || left.attribute == .trailing) ? .width : .height, toItem: nil, attribute: .notAnAttribute, multiplier: percent.value, constant: value.constant)
+            let attr: NSLayoutConstraint.Attribute = (left.attribute == .leading || left.attribute == .trailing) ? .width : .height
+            let arg2 = AJLayoutArgument(item: span, attribute: attr, toItem: view, attribute: attr, multiplier: percent.value, constant: value.constant)
             let c2 = self.constraint(arg2)
             c2.owningView?.addConstraint(c2)
 //            self.layoutConstraints.append(c2)

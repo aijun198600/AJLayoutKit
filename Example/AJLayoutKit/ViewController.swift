@@ -123,11 +123,11 @@ class ViewController: UIViewController {
             v2
         )
         
-        let x1 = |-(50% + 10 ^ "v1 left")-v1.size(300 ^ "v1 size")-v2.size(80 ^ "v2 size")
-        let x2 = &-(50% + 10 ^ "v1 top")-v1-v2
         self.view.layout(
-            x1,
-            x2
+            |-(20% + 10 ^ "v1 left")-v1.size(300 ^ "v1 size"),
+            ||v1-(25% + 12 ^ "v1 v2 h span")-v2.size(80 ^ "v2 size"),
+            &-(20% + 10 ^ "v1 top")-v1,
+            &&v1-(30% ^ "v1 v2 v span")-v2
         )
         
         for c in v1.constraints {
