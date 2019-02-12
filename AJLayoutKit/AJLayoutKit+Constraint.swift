@@ -58,12 +58,18 @@ public class AJLayoutConstraint {
     }
     
     public init(left: AJLayoutAttribute, right: AJLayoutAttribute) {
+        if !isCanCombineAttribute(left: left, right: right) {
+            fatalError("can not combine attribute with different direction")
+        }
         self.left = left
         self.right = right
         self.updateType()
     }
     
     public init(left: AJLayoutAttribute, right: AJLayoutAttribute, value:AJValue?) {
+        if !isCanCombineAttribute(left: left, right: right) {
+            fatalError("can not combine attribute with different direction")
+        }
         self.left = left
         self.right = right
         self.value = value
@@ -71,6 +77,9 @@ public class AJLayoutConstraint {
     }
     
     public init(left: AJLayoutAttribute, right: AJLayoutAttribute, value:AJValue? = 0, relation: NSLayoutConstraint.Relation) {
+        if !isCanCombineAttribute(left: left, right: right) {
+            fatalError("can not combine attribute with different direction")
+        }
         self.left = left
         self.right = right
         self.value = value
@@ -93,3 +102,16 @@ public class AJLayoutConstraint {
     }
 }
 
+
+func isCanCombineAttribute(left: AJLayoutAttribute, right: AJLayoutAttribute) -> Bool {
+    
+    let yAttributes: [NSLayoutConstraint.Attribute] = [.centerX, .left, .leading, .trailing, .right]
+    let xAttributes: [NSLayoutConstraint.Attribute] = [.centerY, .top, .bottom, .firstBaseline, .lastBaseline]
+    let canNilAttributes: [NSLayoutConstraint.Attribute] = [.width, .height, .notAnAttribute]
+    
+    if (yAttributes.contains(left.attribute) && yAttributes.contains(right.attribute)) || (xAttributes.contains(left.attribute) && xAttributes.contains(right.attribute)) || (canNilAttributes.contains(left.attribute) && canNilAttributes.contains(right.attribute)) {
+        return true
+    }
+    
+    return false
+}

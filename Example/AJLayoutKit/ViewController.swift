@@ -129,7 +129,9 @@ class ViewController: UIViewController {
         
         self.view.layout(
             |-(20% + 10 ^ "v1 left")-v1.size(300 ^ "v1 size")-(25% + 12 ^ "v1 v2 h span")-v2.size(80 ^ "v2 size"),
-            &-(20% + 10 ^ "v1 top")-v1-(30% ^ "v1 v2 h span")-v2
+            &-(20% + 10 ^ "v1 top")-v1-(30% ^ "v1 v2 h span")-v2,
+            v3.size(66).CenterX == self.view.CenterX,
+            v3.CenterY == self.view.CenterY
         )
         
         for c in v1.constraints {

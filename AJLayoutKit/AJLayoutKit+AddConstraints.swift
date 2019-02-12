@@ -89,6 +89,8 @@ public extension AJLayoutConstraint {
             self.createChainConstraints()
         }else if self.type == .dimension {
             self.createDimensionConstraints()
+        }else {
+            self.createNormalConstraints()
         }
     }
 }
@@ -277,8 +279,49 @@ public extension AJLayoutConstraint {
             c.owningView?.addConstraint(c)
 //            self.layoutConstraints.append(c)
         }
+    }
+    
+    func createNormalConstraints() {
+        guard self.type == .normal else {
+            return
+        }
         
-        return
+        var leftItem = left
+        var rightItem = right
+        var value = self.value
+        if self.left.view == nil {
+            rightItem = left
+            leftItem = right
+            value?.reverse()
+            if self.relation == .greaterThanOrEqual {
+                relation = .lessThanOrEqual
+            }else if self.relation == .lessThanOrEqual {
+                relation = .greaterThanOrEqual
+            }
+        }
+        
+        var multiplier: CGFloat = 1.0
+        if let v = value, let percent = v.percent, percent.value != 0 {
+            multiplier = percent.value
+        }
+        var constant: CGFloat = 0
+        if let v = value {
+            constant = v.constant
+        }
+        
+        var leftView: AnyObject?
+        if let view = leftItem.view {
+            leftView = view as AnyObject
+        }else if let _ = leftItem.view as? AJLayoutSide, let rightView = rightItem.view as? UIView, let spv = rightView.superview {
+            leftView = spv
+        }
+        
+        if let view  = leftView {
+            let arg = AJLayoutArgument(item: view, attribute: leftItem.attribute, toItem: rightItem.view as AnyObject, attribute: rightItem.attribute, multiplier: multiplier, constant: constant)
+            let c = self.constraint(arg)
+            c.owningView?.addConstraint(c)
+        }
+        
     }
     
     fileprivate func chainConnectAttribute(_ attribute: NSLayoutConstraint.Attribute) -> NSLayoutConstraint.Attribute {
