@@ -7,6 +7,17 @@ AJLayoutKit为iOS Auto Layout增加了一些语法糖, 使用接近VFL类似的�
 - [ ] 修改AJValue自动更新约束(暂时有bug)
 
 
+# 导入
+可以使用cocoapods导入。
+```
+platform :ios, '9.0'
+use_frameworks!
+
+target 'MyApp' do
+	pod 'AJLayoutKit'
+end
+```
+
 # 使用示例
 ```
 	self.view.layout(
