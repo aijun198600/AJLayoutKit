@@ -148,7 +148,6 @@ public extension AJLayoutConstraint {
         if let v = self.left.view as? UIView {
             view = v
             spv = v.superview
-            value.reverse()
         }else if let v = self.right.view as? UIView {
             view = v
             spv = v.superview
@@ -160,7 +159,7 @@ public extension AJLayoutConstraint {
         
         if #available(iOS 11.0, *) {
             // if the superview has no superview, it should use safe area, present superview be the viewcontroller's view
-            if let v = spv as? UIView, v.superview is UIWindow {
+            if let v = spv as? UIView, v.superview is UIWindow || v.superview == nil {
                 spv = v.safeAreaLayoutGuide
             }
         }
@@ -274,7 +273,7 @@ public extension AJLayoutConstraint {
             let rightConstraint = self.constraint(rightArg)
             rightConstraint.owningView?.addConstraint(rightConstraint)
         }else {
-            let arg = AJLayoutArgument(item: leftView, attribute: left.attribute, toItem: rightView, attribute: right.attribute, multiplier: 1.0, constant: (self.value != nil ? self.value!.constant : 0))
+            let arg = AJLayoutArgument(item: leftView, attribute: left.attribute, toItem: rightView, attribute: right.attribute, multiplier: 1.0, constant: (self.value != nil ? -self.value!.constant : 0))
             let c = self.constraint(arg)
             c.owningView?.addConstraint(c)
 //            self.layoutConstraints.append(c)

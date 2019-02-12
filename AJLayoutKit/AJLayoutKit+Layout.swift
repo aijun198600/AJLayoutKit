@@ -38,6 +38,8 @@ public extension UIView {
                 c.addConstraints()
             case let c as AJLayoutConstraint:
                 c.addConstraints()
+            case let c as [AJLayoutConstraint]:
+                for i in c{ i.addConstraints() }
             default: ()
             }
         }
