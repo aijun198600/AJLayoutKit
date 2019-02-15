@@ -4,7 +4,7 @@ AJLayoutKit为iOS Auto Layout增加了一些语法糖, 使用接近VFL类似的�
 - [x] **宽高父容器百分比**
 - [x] **间距父容器百分比**
 - [x] **Safe Area支持**
-- [ ] 修改AJValue自动更新约束(暂时有bug)
+- [ ] 修改AJValue自动更新约束
 
 
 # 导入
