@@ -11,12 +11,12 @@ import UIKit
 public extension UIView {
     
     @discardableResult
-    public func sv(_ subViews: UIView...) -> UIView {
+    func sv(_ subViews: UIView...) -> UIView {
         return sv(subViews)
     }
     
     @discardableResult
-    public func sv(_ subViews: [UIView]) -> UIView {
+    func sv(_ subViews: [UIView]) -> UIView {
         for sv in subViews {
             addSubview(sv)
             sv.translatesAutoresizingMaskIntoConstraints = false
@@ -25,12 +25,12 @@ public extension UIView {
     }
     
     @discardableResult
-    public func layout(_ objects: Any...) -> UIView {
+    func layout(_ objects: Any...) -> UIView {
         return layout(objects)
     }
     
     @discardableResult
-    public func layout(_ objects: [Any]) -> UIView {
+    func layout(_ objects: [Any]) -> UIView {
         
         for (_, o) in objects.enumerated() {
             switch o {

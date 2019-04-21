@@ -10,7 +10,7 @@ import UIKit
 
 public extension AJLayoutContainer {
     
-    public func addConstraints() {
+    func addConstraints() {
         for c in constraints {
             c.addConstraints()
         }
@@ -20,7 +20,7 @@ public extension AJLayoutContainer {
 
 public extension AJLayoutConstraint {
     
-    public func addConstraints() {
+    func addConstraints() {
 //        self.removeConstraints()
         self.generateConstraints()
         
@@ -43,7 +43,7 @@ public extension AJLayoutConstraint {
 //        NSLayoutConstraint.activate(self.layoutConstraints)
     }
     
-    public func constraint(_ argument: AJLayoutArgument) -> NSLayoutConstraint {
+    func constraint(_ argument: AJLayoutArgument) -> NSLayoutConstraint {
         let c = NSLayoutConstraint(item: argument.firstItem, attribute: argument.firstAttribute, relatedBy: self.relation, toItem: argument.secondItem, attribute: ((argument.secondAttribute == nil) ? argument.firstAttribute : argument.secondAttribute!), multiplier: argument.multiplier, constant: argument.constant)
         var priority: UILayoutPriority = UILayoutPriority(rawValue: 1000)
         var identifier: String?
@@ -82,7 +82,7 @@ public struct AJLayoutArgument {
 
 public extension AJLayoutConstraint {
     // generate constraints and add the UILayoutGuide
-    public func generateConstraints() {
+    func generateConstraints() {
         if self.type == .side {
             self.createSideConstraints()
         }else if (self.type == .chain) {

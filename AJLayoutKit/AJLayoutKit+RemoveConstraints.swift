@@ -29,13 +29,13 @@ public extension AJLayoutConstraint {
 }
 
 public extension AJLayoutConstraint {
-    public var owningView: UIView? {
+    var owningView: UIView? {
         return constraintOwningView(with: self.left.view as AnyObject?, and: self.right.view as AnyObject?)
     }
 }
 
 public extension NSLayoutConstraint {
-    public var owningView: UIView? {
+    var owningView: UIView? {
         return constraintOwningView(with: self.firstItem, and: self.secondItem)
     }
 }

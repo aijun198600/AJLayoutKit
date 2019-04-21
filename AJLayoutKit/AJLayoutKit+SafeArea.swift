@@ -12,57 +12,57 @@ extension UILayoutGuide: AJLayoutElement {}
 
 public extension UIView {
     @available(iOS 11.0, *)
-    public var safeArea: UILayoutGuide{
+    var safeArea: UILayoutGuide{
         return self.safeAreaLayoutGuide
     }
 }
 
 public extension UILayoutGuide {
-    public var Width: AJLayoutAttribute {
+    var Width: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .width)
     }
     
-    public var Height: AJLayoutAttribute {
+    var Height: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .height)
     }
     
-    public var Top: AJLayoutAttribute {
+    var Top: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .top)
     }
     
-    public var Bottom: AJLayoutAttribute {
+    var Bottom: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .bottom)
     }
     
-    public var Left: AJLayoutAttribute {
+    var Left: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .left)
     }
     
-    public var Right: AJLayoutAttribute {
+    var Right: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .right)
     }
     
-    public var Leading: AJLayoutAttribute {
+    var Leading: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .leading)
     }
     
-    public var Trailing: AJLayoutAttribute {
+    var Trailing: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .trailing)
     }
     
-    public var CenterX: AJLayoutAttribute {
+    var CenterX: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .centerX)
     }
     
-    public var CenterY: AJLayoutAttribute {
+    var CenterY: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .centerY)
     }
     
-    public var FirstBaseline: AJLayoutAttribute {
+    var FirstBaseline: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .firstBaseline)
     }
     
-    public var LastBaseline: AJLayoutAttribute {
+    var LastBaseline: AJLayoutAttribute {
         return AJLayoutAttribute(self, attribute: .lastBaseline)
     }
 }
